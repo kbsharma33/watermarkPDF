@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Watermark PDF</title>
+</head>
+<body>
+    <h1>Watermark Your PDF</h1>
+    
+    <form action="/preview" method="post" enctype="multipart/form-data">
+        <label for="pdf_file">Upload PDF:</label>
+        <input type="file" id="pdf_file" name="pdf_file" required>
+        <button type="submit">Preview First Page</button>
+    </form>
+
+    {% if preview_url %}
+        <h2>First Page Preview</h2>
+        <img src="{{ preview_url }}" alt="First Page Preview" style="max-width: 100%; height: auto;">
+        <form action="/watermark" method="post" enctype="multipart/form-data">
+            <label for="image_file">Upload Watermark Image:</label>
+            <input type="file" id="image_file" name="image_file" required><br><br>
+
+            <label for="transparency">Transparency (0.0 to 1.0):</label>
+            <input type="number" id="transparency" name="transparency" step="0.1" min="0" max="1" value="0.5" required><br><br>
+
+            <label for="x_position">X Position (px):</label>
+            <input type="number" id="x_position" name="x_position" required><br><br>
+
+            <label for="y_position">Y Position (px):</label>
+            <input type="number" id="y_position" name="y_position" required><br><br>
+
+            <button type="submit">Add Watermark</button>
+        </form>
+    {% endif %}
+</body>
+</html>
